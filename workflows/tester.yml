@@ -1,0 +1,33 @@
+name: tester
+
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - common/docker/tester/**
+    - .github/workflows/tester.yml
+  schedule:
+  - cron:  '0 7 * * *'
+
+jobs:
+  build:
+    name: tester
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Build and push image
+      env:
+        DOCKER_BUILDKIT: 1
+      uses: docker/build-push-action@v1
+      with:
+        path: common/docker/tester
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        repository: nicholasdille/tester
+        tags: latest
+        tag_with_ref: true

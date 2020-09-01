@@ -1,0 +1,29 @@
+# Geordnete Updates für Pods
+
+# Cluster erstellen
+kind create cluster --config kind.yaml
+
+# StatefulSet anschauen
+cat db.yaml
+
+# StatefulSet ausrollen
+kubectl apply -f db.yaml
+
+# Ergebnis anschauen
+kubectl get all
+
+# Wiederherstellung anschauen
+kubectl delete pod mysql-0
+
+# StatefulSet anschauen
+cat web.yaml
+
+# StatefulSet ausrollen
+kubectl apply -f web.yaml
+
+# Ergebnis anschauen
+kubectl get all
+
+# DNS testen (Headless Service löst zur Pod-IP auf)
+kubectl run -it --rm --image=nicholasdille/tester --command -- bash
+host server

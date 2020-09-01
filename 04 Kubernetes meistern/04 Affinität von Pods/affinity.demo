@@ -1,0 +1,15 @@
+# Affinität
+
+kind create cluster --config kind.yaml
+
+cat node_affinity.yaml
+kubectl apply -f node_affinity.yaml
+kubectl get pods -o wide
+kubectl cordon kind-worker
+kubectl delete -f node_affinity.yaml
+kubectl apply -f node_affinity.yaml
+kubectl uncordon kind-worker
+
+cat pod_affinity.yaml
+kubectl apply -f pod_affinity.yaml
+kubectl get pods -o wide

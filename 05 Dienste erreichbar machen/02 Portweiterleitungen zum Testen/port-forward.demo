@@ -1,0 +1,6 @@
+# Portweiterleitungen zum Testen
+
+kind create cluster --config kind.yaml
+kubectl apply -f app.yaml
+kubectl port-forward service/web 8080:80
+# Check http://localhost:8080/

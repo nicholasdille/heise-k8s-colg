@@ -1,0 +1,19 @@
+# Images auf Sicherheitslücken prüfen
+
+## Schnellstart
+docker run -it --rm --volume ${HOME}/.cache:/root/.cache aquasec/trivy image python:3.4-alpine
+
+## CI: Herunterladen der Datenbank
+docker run -it --rm --volume ${HOME}/.cache:/root/.cache aquasec/trivy image --download-db-only
+
+## CI: Scannen mit existierender Datenbank
+docker run -it --rm --volume ${HOME}/.cache:/root/.cache aquasec/trivy image --skip-update python:3.4-alpine
+
+## CI: Filtern nach Schwere
+docker run -it --rm --volume ${HOME}/.cache:/root/.cache aquasec/trivy image --skip-update --severity HIGH,CRITICAL python:3.4-alpine
+
+## CI: Abbruch bei Ergebnis
+docker run -it --rm --volume ${HOME}/.cache:/root/.cache aquasec/trivy image --skip-update --severity HIGH,CRITICAL --exit-code 1 python:3.4-alpine
+
+## CI: Automatische Verarbeitung
+docker run -it --rm --volume ${HOME}/.cache:/root/.cache aquasec/trivy --quiet image --skip-update --severity HIGH,CRITICAL --format json python:3.4-alpine | jq -c

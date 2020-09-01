@@ -1,0 +1,33 @@
+name: sleeper
+
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - common/docker/sleeper/**
+    - .github/workflows/sleeper.yml
+  schedule:
+  - cron:  '0 7 * * *'
+
+jobs:
+  build:
+    name: sleeper
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Build and push image
+      env:
+        DOCKER_BUILDKIT: 1
+      uses: docker/build-push-action@v1
+      with:
+        path: common/docker/sleeper
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        repository: nicholasdille/sleeper
+        tags: latest
+        tag_with_ref: true

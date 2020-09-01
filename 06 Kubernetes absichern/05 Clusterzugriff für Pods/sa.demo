@@ -1,0 +1,15 @@
+# Clusterzugriff für Pods
+
+## Cluster erstellen
+kind create cluster --config kind.yaml
+
+## RBAC und Pods ausrollen
+kubectl apply -f rbac.yaml
+kubectl apply -f pod.yaml
+
+## RBAC testen
+kubectl exec -it sa -- bash
+TOKEN=$(cat /run/secrets/kubernetes.io/serviceaccount/token)
+curl https://kubernetes/api/v1/namespaces/default/pods/ \
+    --cacert /run/secrets/kubernetes.io/serviceaccount/ca.crt \
+    --header "Authorization: Bearer ${TOKEN}"

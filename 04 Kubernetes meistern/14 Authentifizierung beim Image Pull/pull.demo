@@ -1,0 +1,16 @@
+# Authentifizierung beim Image Pull
+
+## Cluster erstellen
+kind create cluster --config kind.yaml
+
+## Secret ausrollen
+read -p "Email: " -s DOCKER_HUB_EMAIL
+read -p "Password: " -s DOCKER_HUB_PASSWORD
+kubectl create secret docker-registry dockerhub \
+    --docker-server=https://index.docker.io/v1/ \
+    --docker-username=nicholasdille \
+    --docker-password=${DOCKER_HUB_PASSWORD} \
+    --docker-email=${DOCKER_HUB_EMAIL}
+
+## Anwendung ausrollen
+kubectl apply -f app.yaml

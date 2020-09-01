@@ -1,0 +1,32 @@
+# Firewallregeln im Cluster
+
+## Cluster erstellen
+kind create cluster --config kind.yaml
+
+## Calico ausrollen
+curl --silent --location https://docs.projectcalico.org/manifests/calico-typha.yaml | kubectl apply -f -
+kubectl -n kube-system set env daemonset/calico-node FELIX_IGNORELOOSERPF=true
+
+## Ausrollen beider Anwendungen
+kubectl apply -f app1.yaml
+kubectl apply -f app2.yaml
+
+## Testen der Konnektivität
+kubectl -n app1 get pod -l app=web -o name | xargs -I{} kubectl -n app1 exec {} -- curl -s web.app2
+kubectl -n app2 get pod -l app=web -o name | xargs -I{} kubectl -n app2 exec {} -- curl -s web.app1
+
+## Konfiguration der Clusterkommunikation
+kubectl apply -f app1-networkpolicy-cluster.yaml
+kubectl apply -f app2-networkpolicy-cluster.yaml
+
+## Testen der Konnektivität
+kubectl -n app1 get pod -l app=web -o name | xargs -I{} kubectl -n app1 exec {} -- curl -s web.app2
+kubectl -n app2 get pod -l app=web -o name | xargs -I{} kubectl -n app2 exec {} -- curl -s web.app1
+
+## Konfiguration der externen Zugriffe
+kubectl apply -f app1-networkpolicy-cluster.yaml
+kubectl apply -f app2-networkpolicy-cluster.yaml
+
+## Testen der Konnektivität
+kubectl -n app1 get pod -l app=web -o name | xargs -I{} kubectl -n app1 exec {} -- curl -sL heise.de
+kubectl -n app2 get pod -l app=web -o name | xargs -I{} kubectl -n app2 exec {} -- curl -sL heise.de

@@ -1,0 +1,26 @@
+# Mehrere Cluster
+
+## Vorbereitung
+kind create cluster --name cluster1
+kind create cluster --name cluster2
+kubectl config view --raw --output json | \
+    jq --raw-output '.clusters[] | select(.name | startswith("kind-")) | .cluster.server' | \
+    while read; do \
+        echo ${REPLY#https://}; \
+    done | \
+    xargs -n 1 -I{} ssh -fNL {}:{} docker-hcloud
+
+# Cluster anzeigen
+kind get clusters
+
+# Kontexte anzeigen
+kubectx
+
+# Knoten anzeigen
+kubectl get nodes
+
+# Kontext wechseln
+kubectx kind-cluster1
+
+# Knoten anzeigen
+kubectl get nodes

@@ -1,0 +1,22 @@
+# Vorwissen: Container-Images
+
+## Images herunterladen
+docker pull ubuntu
+docker pull alpine
+
+## Images anschauen (Name und Tag)
+docker image ls
+docker image rm ubuntu
+
+## Images bauen
+export DOCKER_BUILDKIT=1
+docker build --tag java-hello-world .
+
+## Images umbenennen
+TAG=$(date +%Y%m%d)
+docker tag java-hello-world nicholasdille/java-hello-world:${TAG}
+
+## Images veröffentlichen
+docker login
+docker push nicholasdille/java-hello-world:${TAG}
+docker logout

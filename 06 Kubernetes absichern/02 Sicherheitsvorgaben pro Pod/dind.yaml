@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dind
+spec:
+  containers:
+  - name: dind
+    image: docker:stable-dind
+    securityContext:
+      privileged: true

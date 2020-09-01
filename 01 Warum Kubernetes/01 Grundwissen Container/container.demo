@@ -1,0 +1,18 @@
+# Vorwissen: Container
+
+## Interaktiver Container
+docker container run -it --name test ubuntu bash
+docker container ps -a
+docker container rm test
+
+## Hintergrundcontainer
+docker container run -d --name web nginx
+docker container ps -a
+ps faux
+
+## Kontext eines Containers
+docker container exec -it web bash
+docker container exec -it web curl localhost
+
+## Logs eines Containers
+docker container logs web

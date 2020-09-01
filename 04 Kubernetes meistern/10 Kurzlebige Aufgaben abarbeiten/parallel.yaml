@@ -1,0 +1,21 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: parallel
+spec:
+  parallelism: 2
+  completions: 3
+  backoffLimit: 10
+  template:
+    spec:
+      containers:
+      - name: parallel
+        image: ubuntu
+        command:
+        - bash
+        - -c
+        args:
+        - |
+          if test "$((RANDOM % 2))" == "0"; then echo false; false; else echo true; true; fi
+      restartPolicy: Never

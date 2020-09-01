@@ -1,0 +1,23 @@
+# Ressourcen logisch trennen
+
+kind create cluster --config kind.yaml
+kubectl get namespace
+
+## Namespace erstellen
+cat namespace.yaml
+kubectl apply -f namespace.yaml
+
+## Deployment in Namespace
+cat app.yaml
+kubectl apply -f app.yaml
+
+## kubectl verwendet Namespace default
+kubectl get pods
+kubectl --namespace=app get pods
+kubectl get pods -A
+
+## Netzwerk zwischen Namespaces
+kubectl run -it --rm --image=nicholasdille/tester --command -- bash
+curl web
+curl web.app
+curl web.app.svc.cluster.local

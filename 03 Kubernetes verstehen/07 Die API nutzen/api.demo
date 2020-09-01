@@ -1,0 +1,30 @@
+# Die API benutzern
+
+## Cluster erstellen
+kind create cluster --config kind.yaml
+kubectl apply -f app.yaml
+
+## URL des API-Servers auslesen
+APISERVER=$(kubectl config view --raw --output json | jq -r '.clusters[] | select(.name == "kind-kind") | .cluster.server')
+
+## Zertifikat des API-Servers abspeichern
+kubectl config view --raw --output json | jq -r '.clusters[] | select(.name == "kind-kind") | .cluster."certificate-authority-data"' | base64 -d >apiserver.crt
+
+## Clientzertifikat auslesen
+kubectl config view --raw --output json | jq -r '.users[] | select(.name == "kind-kind") | .user."client-certificate-data"' | base64 -d >client.crt
+kubectl config view --raw --output json | jq -r '.users[] | select(.name == "kind-kind") | .user."client-key-data"' | base64 -d >client.key
+
+## Mit der API sprechen
+curl --silent --cacert ./apiserver.crt --cert ./client.crt --key ./client.key ${APISERVER}/api
+
+## Status der Komponenten der Control Plane auslesen
+curl --silent --cacert ./apiserver.crt --cert ./client.crt --key ./client.key ${APISERVER}/api/v1/componentstatuses | jq .items[] | less
+
+## Pods im Namespace kube-system auslesen
+curl --silent --cacert ./apiserver.crt --cert ./client.crt --key ./client.key ${APISERVER}/api/v1/namespaces/kube-system/pods/ | jq -r '.items[].metadata.name'
+
+## Alle Deployments im Cluster auslesen
+curl --silent --cacert ./apiserver.crt --cert ./client.crt --key ./client.key ${APISERVER}/apis/apps/v1/deployments/ | jq -r '.items[].metadata.name'
+
+## Bestimmtes Deployment auslesen
+curl --silent --cacert ./apiserver.crt --cert ./client.crt --key ./client.key ${APISERVER}/apis/apps/v1/deployments/ | jq '.items[] | select(.metadata.name == "web")'

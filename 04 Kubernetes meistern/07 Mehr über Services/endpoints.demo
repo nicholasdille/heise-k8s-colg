@@ -1,0 +1,27 @@
+# Endpoints
+
+# Cluster erstellen
+kind create cluster --config kind.yaml
+
+# Deployment anschauen und ausrollen
+cat endpoints.yaml
+kubectl apply -f endpoints.yaml
+
+# Ergebnis anschauen
+kubectl get all
+
+# Endpoints prüfen
+kubectl describe service web
+kubectl get endpoints web
+kubectl get endpoints web -o yaml
+
+# Deployment anschauen und ausrollen
+cat ready.yaml
+kubectl apply -f ready.yaml
+
+# Ergebnis anschauen
+kubectl get all
+
+# Endpoints prüfen
+kubectl describe service ready
+kubectl get endpoints ready

@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-affinity
+spec:
+  selector:
+    matchLabels:
+      app: affinity
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: affinity
+        affinity: required
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: affinity
+                operator: In
+                values:
+                - required
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: nginx
+        image: nicholasdille/nginx-hello
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-anti-affinity
+spec:
+  selector:
+    matchLabels:
+      app: anti-affinity
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: anti-affinity
+        affinity: anti
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: affinity
+                operator: In
+                values:
+                - anti
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: nginx
+        image: nicholasdille/nginx-hello

@@ -1,0 +1,15 @@
+# Sicherheitsvorgaben pro Pod
+
+## Cluster erstellen
+kind create cluster --config kind.yaml
+
+## Privilegierten Pod erlaufen
+cat dind.yaml
+kubectl apply -f dind.yaml
+kubectl get pods
+kubectl logs pods
+
+## Anpassung der Systemzeit erlauben
+cat ntpd.yaml
+kubectl apply -f ntpd.yaml
+kubectl get pods

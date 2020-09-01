@@ -1,0 +1,35 @@
+# Lifecycle Management
+
+# Deployment-Beschreibung anschauen
+cat deployment.yaml
+
+# Deployment ausrollen
+kubectl apply -f deployment.yaml
+
+# Service
+cat service.yaml
+kubectl apply -f service.yaml
+
+# Ergebnis anschauen
+# - Felder im Deployment erklären
+# - Zugehöriges ReplicaSet erklären
+# - Zugehörige Pods anschauen
+kubectl get all
+
+# Test
+kubectl run -it --image=cmd.cat/bash/curl --rm --command -- bash
+watch curl -s web
+
+# Update
+yq write --inplace deployment.yaml 'spec.template.spec.containers(name==nginx).image' nicholasdille/nginx-hello:1.18
+kubectl apply -f deployment.yaml
+
+# Test
+kubectl run -it --image=cmd.cat/bash/curl --rm --command -- bash
+watch curl -s web
+
+# Update history
+kubectl rollout history deployment web
+
+# Rollback
+kubectl rollout undo deployment web

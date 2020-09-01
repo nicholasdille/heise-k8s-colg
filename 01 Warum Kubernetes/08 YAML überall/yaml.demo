@@ -1,0 +1,11 @@
+# YAML überall
+
+## Einfache YAML-Datei (Hash und Array)
+cat simple.yaml
+
+## Komplexe YAML-Datei
+cat complex.yaml
+
+## YAML nach JSON konvertieren
+yq read simple.yaml --tojson --prettyPrint
+yq read complex.yaml --tojson --prettyPrint

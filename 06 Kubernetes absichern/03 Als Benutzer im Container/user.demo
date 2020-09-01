@@ -1,0 +1,19 @@
+# Als Benutzer im Container
+
+## Cluster erstellen
+kind create cluster --config kind.yaml
+
+## Sicherstellen des Benutzers
+cat nginx.yaml
+kubectl apply -f nginx.yaml
+kubectl get pods
+kubectl exec -it nginx -- bash
+curl localhost
+curl localhost:8080
+
+## Erzwingen des Benutzers
+cat user.yaml
+kubectl apply -f nginx.yaml
+kubectl get pods
+kubectl exec -it user -- sh
+whoami

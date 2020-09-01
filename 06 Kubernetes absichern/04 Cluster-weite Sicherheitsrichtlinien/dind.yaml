@@ -1,0 +1,20 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dind
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dind
+  template:
+    metadata:
+      labels:
+        app: dind
+    spec:
+      containers:
+      - name: dind
+        image: docker:stable-dind
+        securityContext:
+          privileged: true

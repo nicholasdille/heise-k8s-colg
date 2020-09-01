@@ -1,0 +1,15 @@
+# Knoten bevorzugen
+
+kind create cluster --config kind.yaml
+
+cat guaranteed.yaml
+kubectl apply -f guaranteed.yaml
+kubectl get pods -o wide
+
+cat burstable.yaml
+kubectl apply -f burstable.yaml
+kubectl get pods -o wide
+
+cat besteffort.yaml
+kubectl apply -f besteffort.yaml
+kubectl get pods -o wide

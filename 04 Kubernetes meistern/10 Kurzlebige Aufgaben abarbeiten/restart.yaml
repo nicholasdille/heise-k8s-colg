@@ -1,0 +1,18 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: restart
+spec:
+  template:
+    spec:
+      containers:
+      - name: restart
+        image: ubuntu
+        command:
+        - bash
+        - -c
+        args:
+        - |
+          if test "$((RANDOM % 2))" == "0"; then echo false; false; else echo true; true; fi
+      restartPolicy: OnFailure

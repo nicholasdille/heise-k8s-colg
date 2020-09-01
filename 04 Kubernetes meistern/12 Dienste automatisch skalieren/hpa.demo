@@ -1,0 +1,18 @@
+# Dienste automatisch skalieren
+
+# Cluster erstellen
+kind create cluster --config kind.yaml
+curl -sLf https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml | kubectl apply -f -
+kubectl --namespace=kube-system patch deployment metrics-server --type strategic --patch "$(cat metrics-server-patch.yaml)"
+
+cat deployment.yaml
+kubectl apply -f deployment.yaml
+
+cat hpa.yaml
+kubectl apply -f hpa.yaml
+kubectl get all
+
+kubectl run -it --rm load-generator --image=busybox /bin/sh
+while true; do wget -q -O- http://php-apache; done
+kubectl get all
+kubectl get deployment php-apache

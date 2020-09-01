@@ -1,0 +1,20 @@
+# Mehrere Namespaces
+
+## Vorbereitungen
+kind create cluster
+#timeout 120 bash -c 'while kubectl get node | grep " NotReady "; do sleep 2; done'
+
+## Namespaces anzeigen
+kubectl get namespaces
+
+## Ausgewählten Namespace finden
+kubectl get configmap
+
+## Namespaces anzeigen
+kubens
+
+## Namespace wechseln
+kubens kube-system
+
+## Ausgewählten Namespace nutzen
+kubectl get all

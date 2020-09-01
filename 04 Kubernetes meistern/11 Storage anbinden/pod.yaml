@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+spec:
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: dummy-claim
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - mountPath: "/usr/share/nginx/html"
+      name: data

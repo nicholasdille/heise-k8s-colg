@@ -1,0 +1,14 @@
+# Knoten mit Taints markieren
+
+kind create cluster --config kind.yaml
+
+kubectl taint node kind-worker dille.io/reservedFor=web2:NoSchedule reservedFor=foo:NoExecute
+kubectl describe node kind-worker
+
+cat deployment.yaml
+kubectl apply -f deployment.yaml
+kubectl get pods -o wide
+
+cat tolerations.yaml
+kubectl apply -f tolerations.yaml
+kubectl get pods -o wide

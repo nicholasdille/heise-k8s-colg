@@ -1,0 +1,27 @@
+# Knoten für Pods
+
+## Cluster erstellen
+kind create cluster --config kind.yaml
+
+## Knoten auslesen
+kubectl get nodes
+
+## Knoten untersuchen (Labels, Annotations, Conditions, Allocatable, Pods)
+kubectl describe node kind-control-plane
+
+# Pods ausrollen
+kubectl apply -f app.yaml
+kubectl get pods -o wide
+
+# Knoten sperren
+kubectl cordon kind-worker
+kubectl get nodes
+kubectl scale --replicas=1 deployment web
+kubectl scale --replicas=8 deployment web
+kubectl get pods -o wide
+kubectl uncordon kind-worker
+
+# Knoten leeren und sperren
+kubectl drain kind-worker2 --ignore-daemonsets
+kubectl get nodes
+kubectl get pods -o wide

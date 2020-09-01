@@ -1,0 +1,5 @@
+# Leichtgewichtige Cluster
+
+k3d cluster create --agents 2
+
+kubectl get nodes

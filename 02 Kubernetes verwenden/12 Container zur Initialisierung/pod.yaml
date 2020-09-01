@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-init
+  labels:
+    app: nginx
+spec:
+  volumes:
+  - name: data
+    emptyDir: {}
+  initContainers:
+  - name: init
+    image: nginx
+    command:
+    - bash
+    - -c
+    args:
+    - echo "Hallo von $(hostname)" | tee /usr/share/nginx/html/index.html
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: data
+  containers:
+  - name: env
+    image: nginx
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: data

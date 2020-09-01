@@ -1,0 +1,10 @@
+# Knoten bevorzugen
+
+kind create cluster --name nodeselector --config kind.yaml
+cat nodeselector.yaml
+kubectl apply -f nodeselector.yaml
+kubectl get pods -o wide
+
+yq write -i nodeselector.yaml 'spec.template.spec.nodeSelector."dille.io/even"' maybe
+kubectl apply -f nodeselector.yaml
+kubectl get pods -o wide

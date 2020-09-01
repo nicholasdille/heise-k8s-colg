@@ -1,0 +1,15 @@
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: web
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - host: web.dille.io
+      http:
+        paths:
+          - backend:
+              serviceName: web
+              servicePort: 80

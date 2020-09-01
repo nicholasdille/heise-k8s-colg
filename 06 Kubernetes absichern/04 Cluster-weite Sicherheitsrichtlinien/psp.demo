@@ -1,0 +1,20 @@
+# Cluster-weite Sicherheitsrichtlinien
+
+## Cluster erstellen
+kind create cluster --config kind.yaml
+
+## Pod Security Policy aktivieren
+docker cp kind-control-plane:/etc/kubernetes/manifests/kube-apiserver.yaml .
+sed -i -E 's/^(\s+- --enable-admission-plugins=.+)$/\1,PodSecurityPolicy/' kube-apiserver.yaml
+docker cp kube-apiserver.yaml kind-control-plane:/etc/kubernetes/manifests/
+
+## Variante 1 (beschränkt privileged in default nicht)
+kubectl apply -f example.yaml
+
+## Variante 2
+kubectl apply -f privileged-psp-with-rbac.yaml
+kubectl apply -f default-psp-with-rbac.yaml
+
+## Prüfen der Annotation kubernetes.io/psp
+kubectl apply -f app.yaml
+kubectl describe pod -l app=web

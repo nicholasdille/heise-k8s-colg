@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: user
+spec:
+  containers:
+  - name: user
+    image: nicholasdille/sleeper
+    securityContext:
+      runAsUser: 65534
+      runAsGroup: 65534

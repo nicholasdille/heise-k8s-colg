@@ -1,0 +1,15 @@
+# Reverse Proxy als Zugangspunkt
+
+# create DNS record *.dille.io to 127.0.0.1
+kind create cluster --config kind.yaml
+sudo ssh -fNL 127.0.0.1:80:127.0.0.1:80 -i ~nicholas/id_rsa_hetzner docker.dille.io
+
+# check resources
+cat traefik-*.yaml | kubectl apply -f -
+# check http://traefik.dille.io/dashboard
+
+# check resources
+cat app-*.yaml | kubectl apply -f -
+# check http://traefik.dille.io/dashboard
+# check http://web.dille.io
+# reload

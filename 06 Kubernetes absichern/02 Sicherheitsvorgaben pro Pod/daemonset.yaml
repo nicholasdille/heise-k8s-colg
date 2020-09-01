@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: ntpd
+spec:
+  containers:
+  - name: ntpd
+    image: nicholasdille/openntpd
+    securityContext:
+      capabilities:
+        add:
+        - SYS_NICE
+        - SYS_TIME
+      allowPrivilegeEscalation: false

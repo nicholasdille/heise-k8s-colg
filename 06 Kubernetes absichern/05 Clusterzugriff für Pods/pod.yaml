@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sa
+spec:
+  serviceAccountName: test
+  containers:
+  - name: sa
+    image: nicholasdille/sleeper

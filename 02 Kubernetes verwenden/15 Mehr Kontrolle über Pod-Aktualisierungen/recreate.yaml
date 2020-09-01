@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recreate
+spec:
+  strategy:
+    type: Recreate
+  replicas: 10
+  selector:
+    matchLabels:
+      app: recreate
+  template:
+    metadata:
+      labels:
+        app: recreate
+    spec:
+      containers:
+      - name: nginx
+        image: nicholasdille/nginx-hello
+        # Change this
+        imagePullPolicy: IfNotPresent

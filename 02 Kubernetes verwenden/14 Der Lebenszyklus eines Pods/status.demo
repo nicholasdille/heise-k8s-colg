@@ -1,0 +1,13 @@
+# Lebenszyklus
+
+# completed
+kubectl apply -f completed.yaml
+
+# crashloopbackoff
+kubectl apply -f crashloopbackoff.yaml
+
+# failed
+kubectl apply -f failed.yaml
+
+# imagepullbackoff
+kubectl apply -f imagepullbackoff.yaml

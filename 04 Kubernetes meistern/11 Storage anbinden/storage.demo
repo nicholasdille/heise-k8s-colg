@@ -1,0 +1,13 @@
+# Storage anbinden
+
+cat pv.yaml
+kubectl apply -f pv.yaml
+kubectl get pv
+
+cat pvc.yaml
+kubectl apply -f pvc.yaml
+kubectl get pvc
+
+cat pod.yaml
+kubectl apply -f pod.yaml
+kubectl get pods

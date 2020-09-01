@@ -1,0 +1,10 @@
+# Ports auf dem Host öffnen
+
+## Vorbereitungen
+kind create cluster --config kind.yaml
+ssh -fNL 127.0.0.1:8080:127.0.0.1:8080 docker-hcloud
+
+## App ausrollen und testen
+cat app.yaml
+kubectl apply -f app.yaml
+curl localhost:8080

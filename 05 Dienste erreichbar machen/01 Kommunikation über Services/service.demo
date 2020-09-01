@@ -1,0 +1,13 @@
+# Kommunikation über Services
+
+## kube-proxy im Modus iptables
+kind create cluster --config kind-iptables.yaml
+kubectl apply -f app.yaml
+docker exec -it kind-control-plane iptables-save | grep KUBE-SERVICES | grep web
+docker exec -it kind-worker iptables-save | grep KUBE-SERVICES | grep web
+
+## kube-proxy im Module ipvs
+kind create cluster --config kind-ipvs.yaml
+kubectl apply -f app.yaml
+docker exec -it kind-control-plane ipvsadm -ln
+docker exec -it kind-worker ipvsadm -ln

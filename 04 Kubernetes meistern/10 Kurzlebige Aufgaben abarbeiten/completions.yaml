@@ -1,0 +1,19 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: completions
+spec:
+  completions: 3
+  template:
+    spec:
+      containers:
+      - name: completions
+        image: ubuntu
+        command:
+        - bash
+        - -c
+        args:
+        - |
+          if test "$((RANDOM % 2))" == "0"; then echo false; false; else echo true; true; fi
+      restartPolicy: Never

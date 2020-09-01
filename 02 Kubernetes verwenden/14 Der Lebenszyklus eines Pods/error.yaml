@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: error
+spec:
+  containers:
+  - name: error
+    image: alpine
+    command:
+    - "false"
+  restartPolicy: Never

@@ -1,0 +1,31 @@
+courses:
+- title: "Kubernetes: Container-Orchestrierung leicht gemacht"
+  author: Nicholas Dille
+
+  chapters:
+
+  - title: Warum Kubernetes
+    lessons:
+    - title: Grundwissen Container
+    - title: Grundwissen Container-Images
+    - title: Grundwissen docker-compose
+    - title: Warum Container-Orchestrierer
+    - title: Was ist Kubernetes
+    - title: Vom Container zum Pod
+    - title: Deklarative Beschreibung
+    - title: YAML überall
+
+  - title: Kubernetes verwenden
+    lessons: []
+
+  - title: Kubernetes verstehen
+    lessons: []
+
+  - title: Kubernetes meistern
+    lessons: []
+
+  - title: Dienste erreichbar machen
+    lessons: []
+
+  - title: Kubernetes absichern
+    lessons: []

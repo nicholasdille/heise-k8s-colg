@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: crashloopbackoff
+spec:
+  containers:
+  - name: crashloopbackoff
+    image: alpine
+    command:
+    - "false"
+  restartPolicy: Always

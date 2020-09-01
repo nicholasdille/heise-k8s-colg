@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rolling-update
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  replicas: 10
+  selector:
+    matchLabels:
+      app: rolling
+  template:
+    metadata:
+      labels:
+        app: rolling
+    spec:
+      containers:
+      - name: nginx
+        image: nicholasdille/nginx-hello
+        # Hier ändern
+        imagePullPolicy: IfNotPresent

@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+  labels:
+    app: blog
+    component: db
+spec:
+  replicas: 1
+  serviceName: "db"
+  selector:
+    matchLabels:
+      app: blog
+      component: db
+  template:
+    metadata:
+      labels:
+        app: blog
+        component: db
+    spec:
+      volumes:
+      - name: data
+        hostPath:
+          path: /data/blog/db
+          type: DirectoryOrCreate
+      containers:
+      - name: mysql
+        image: mysql:5
+        env:
+        - name: MYSQL_RANDOM_ROOT_PASSWORD
+          value: "yes"
+        - name: MYSQL_DATABASE
+          value: wordpress
+        - name: MYSQL_USER
+          value: wordpress
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db
+              key: password
+        ports:
+        - name: mysql
+          containerPort: 3306
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  clusterIP: None
+  selector:
+    app: blog
+    component: db
+  ports:
+  - name: mysql
+    protocol: TCP
+    port: 3306
+    targetPort: mysql

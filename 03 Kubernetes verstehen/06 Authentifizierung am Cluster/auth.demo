@@ -1,0 +1,19 @@
+# Authentifizierung am Cluster
+
+kind create cluster --config kind.yaml
+curl --silent https://api.github.com/repos/mike-engel/jwt-cli/releases/latest | \
+    jq --raw-output '.assets[] | select(.name | endswith("-linux.tar.gz")) | .browser_download_url' | \
+    xargs curl --location --fail | \
+    tar -xz --strip-components=2
+
+kubectl create sa test
+kubectl get sa test -o json | jq -r '.secrets[].name' | xargs kubectl get secret -o json | jq -r '.data.token' | base64 -d
+kubectl get sa test -o json | jq -r '.secrets[].name' | xargs kubectl get secret -o json | jq -r '.data.token' | base64 -d | ./jwt decode -
+
+TOKEN=$(kubectl get sa test -o json | jq -r '.secrets[].name' | xargs kubectl get secret -o json | jq -r '.data.token' | base64 -d)
+kubectl config set-credentials kind-kind-test --token=${TOKEN}
+kubectl config set-context kind-kind-test --cluster=kind-kind --user=kind-kind-test
+kubectl config get-contexts
+
+kubectl config use-context kind-kind-test
+kubectl get nodes

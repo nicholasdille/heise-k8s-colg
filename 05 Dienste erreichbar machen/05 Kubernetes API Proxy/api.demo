@@ -1,0 +1,13 @@
+# Kubernetes API Proxy
+
+## Vorbereitungen
+kind create cluster --config kind.yaml
+
+## Anwendung ausrollen
+kubectl apply -f app.yaml
+
+## Starten des API Proxy
+kubectl proxy
+
+## Testen des Zugriffs
+https://127.0.0.1:8001/api/v1/namespaces/default/services/web/proxy/

@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ntpd
+spec:
+  selector:
+    matchLabels:
+      app: ntpd
+  template:
+    metadata:
+      labels:
+        app: ntpd
+    spec:
+      containers:
+      - name: ntpd
+        image: nicholasdille/openntpd
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add:
+            - SYS_NICE
+            - SYS_TIME
+      restartPolicy: Always

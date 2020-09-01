@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app1
+  labels:
+    app: app1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: app1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: nginx
+        image: nicholasdille/nginx-hello
+        ports:
+        - name: web
+          containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: app1
+spec:
+  selector:
+    app: web
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: web

@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: imagepullbackoff
+spec:
+  containers:
+  - name: imagepullbackoff
+    image: alpines
+  restartPolicy: Always

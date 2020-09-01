@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ready
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: ready
+  template:
+    metadata:
+      labels:
+        app: ready
+    spec:
+      containers:
+      - name: nginx
+        image: nicholasdille/nginx-hello
+        readinessProbe:
+          exec:
+            command:
+            - "false"
+          initialDelaySeconds: 5
+          failureThreshold: 100
+          periodSeconds: 10
+        ports:
+        - name: http
+          containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ready
+spec:
+  selector:
+    app: ready
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80

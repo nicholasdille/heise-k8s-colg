@@ -1,0 +1,16 @@
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - host: traefik.dille.io
+      http:
+        paths:
+          - backend:
+              serviceName: traefik
+              servicePort: 8080

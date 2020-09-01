@@ -1,0 +1,11 @@
+# Probes
+
+kind create cluster
+
+cat exec.yaml
+kubectl apply -f exec.yaml
+kubectl get pods
+
+# tcp
+# http
+# mysql

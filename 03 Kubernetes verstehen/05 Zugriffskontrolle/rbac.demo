@@ -1,0 +1,19 @@
+# Zugriffskontrolle
+
+kind create cluster --config kind.yaml
+kubectl apply -f namespace.yaml
+
+cat serviceaccount.yaml
+kubectl apply -f serviceaccount.yaml
+kubectl get serviceaccounts
+
+cat role.yaml
+kubectl apply -f role.yaml
+kubectl get roles
+
+cat rolebinding.yaml
+kubectl apply -f rolebinding.yaml
+kubectl get rolebindings
+
+kubectl -n app get all --as system:serviceaccount:app:admin
+kubectl get all --as system:serviceaccount:app:admin

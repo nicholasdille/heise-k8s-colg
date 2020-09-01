@@ -1,0 +1,21 @@
+# Kurzlebige Aufgaben abarbeiten
+
+cat job.yaml
+kubectl apply -f job.yaml
+kubectl get all
+kubectl get pod -l job-name=pi -o name | xargs kubectl
+kubectl delete job pi
+
+cat restart.yaml
+kubectl apply -f restart.yaml
+kubectl get all
+kubectl delete job restart
+
+cat parallel.yaml
+kubectl apply -f parallel.yaml
+kubectl get all
+kubectl delete job parallel
+
+kubectl apply -f cronjob.yaml
+cat cronjob.yaml
+kubectl get all

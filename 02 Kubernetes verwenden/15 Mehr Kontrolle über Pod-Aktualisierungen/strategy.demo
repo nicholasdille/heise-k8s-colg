@@ -1,0 +1,22 @@
+# Update-Strategie
+
+# rolling update
+cat rolling.yaml
+kubectl apply -f rolling.yaml
+kubectl get rs
+yq write --inplace rolling.yaml 'spec.template.spec.containers.(name==nginx).imagePullPolicy' Always
+kubectl apply -f rolling.yaml
+kubectl get rs
+
+# recreate
+cat recreate.yaml
+kubectl apply -f recreate.yaml
+kubectl get rs
+yq write --inplace recreate.yaml 'spec.template.spec.containers.(name==nginx).imagePullPolicy' Always
+kubectl apply -f recreate.yaml
+kubectl get rs
+
+# Rollout history
+kubectl rollout history
+kubectl rollout undo deployment rolling
+kubectl rollout status deployment rolling
