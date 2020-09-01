@@ -1,15 +1,19 @@
 # Knoten bevorzugen
 
+## Cluster ausrollen
 kind create cluster --config kind.yaml
 
+## Beispiel für Pod der QoS-Klasse Guaranteed
 cat guaranteed.yaml
 kubectl apply -f guaranteed.yaml
 kubectl get pods -o wide
 
+## Beispiel für Pod der QoS-Klasse Burstable
 cat burstable.yaml
 kubectl apply -f burstable.yaml
 kubectl get pods -o wide
 
+## Beispiel für Pod der QoS-Klasse BestEffort
 cat besteffort.yaml
 kubectl apply -f besteffort.yaml
 kubectl get pods -o wide

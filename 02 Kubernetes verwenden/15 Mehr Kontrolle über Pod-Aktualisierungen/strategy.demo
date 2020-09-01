@@ -1,22 +1,38 @@
 # Update-Strategie
 
-# rolling update
+## Deployment mit RollingUpdate-Strategie anschauen und ausrollen
 cat rolling.yaml
 kubectl apply -f rolling.yaml
+
+## ReplicaSet beobachten
 kubectl get rs
+
+## Deployment aktualisieren und ausrollen
 yq write --inplace rolling.yaml 'spec.template.spec.containers.(name==nginx).imagePullPolicy' Always
 kubectl apply -f rolling.yaml
+
+## ReplicaSet beobachten
 kubectl get rs
 
-# recreate
+## Deployment mit Recreate-Strategie anschauen und ausrollen
 cat recreate.yaml
 kubectl apply -f recreate.yaml
-kubectl get rs
-yq write --inplace recreate.yaml 'spec.template.spec.containers.(name==nginx).imagePullPolicy' Always
-kubectl apply -f recreate.yaml
+
+## ReplicaSet beobachten
 kubectl get rs
 
-# Rollout history
+## Deployment aktualisieren und ausrollen
+yq write --inplace recreate.yaml 'spec.template.spec.containers.(name==nginx).imagePullPolicy' Always
+kubectl apply -f recreate.yaml
+
+## ReplicaSet beobachten
+kubectl get rs
+
+## Rollout-Historie anschauen
 kubectl rollout history
+
+## Rollback zum letzten Stand
 kubectl rollout undo deployment rolling
+
+## Abschluss des Updates abwarten
 kubectl rollout status deployment rolling

@@ -2,6 +2,8 @@
 
 ## Cluster erstellen
 kind create cluster --config kind.yaml
+
+## Anwendung ausrollen
 kubectl apply -f app.yaml
 
 ## URL des API-Servers auslesen

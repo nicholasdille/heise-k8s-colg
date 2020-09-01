@@ -1,8 +1,18 @@
 # Mehrere Namespaces
 
-## Vorbereitungen
+## Cluster ausrollen
 kind create cluster
-#timeout 120 bash -c 'while kubectl get node | grep " NotReady "; do sleep 2; done'
+
+## Aktuellste Version von kubens installieren
+curl --silent https://api.github.com/repos/ahmetb/kubectx/releases/latest | \
+    jq --raw-output '
+        .assets[]
+        | select(.name | startswith("kubens"))
+        | select(.name | endswith("_linux_x86_64.tar.gz"))
+        | .browser_download_url
+        '| \
+    xargs curl --location --fail | \
+    tar -xz kubens
 
 ## Namespaces anzeigen
 kubectl get namespaces
@@ -11,10 +21,10 @@ kubectl get namespaces
 kubectl get configmap
 
 ## Namespaces anzeigen
-kubens
+./kubens
 
 ## Namespace wechseln
-kubens kube-system
+./kubens kube-system
 
 ## Ausgewählten Namespace nutzen
 kubectl get all

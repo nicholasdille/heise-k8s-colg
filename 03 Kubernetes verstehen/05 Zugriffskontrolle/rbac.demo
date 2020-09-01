@@ -1,19 +1,34 @@
 # Zugriffskontrolle
 
+## Cluster erstellen
 kind create cluster --config kind.yaml
+
+## Namespace erstellen
 kubectl apply -f namespace.yaml
 
+## Beschreibung eines ServiceAccount anschauen und ausrollen
 cat serviceaccount.yaml
 kubectl apply -f serviceaccount.yaml
-kubectl get serviceaccounts
 
+## ServiceAccounts auslesen
+kubectl -n app get serviceaccounts
+
+## Beschreibung einer Rolle anschauen und ausrollen
 cat role.yaml
 kubectl apply -f role.yaml
-kubectl get roles
 
+## Rollen auslesen
+kubectl -n app get roles
+
+# Beschreibung der Rollenzuweisung anschauen und ausrollen
 cat rolebinding.yaml
 kubectl apply -f rolebinding.yaml
-kubectl get rolebindings
 
+## Rollenzuweisungen auslesen
+kubectl -n app get rolebindings
+
+## ServiceAccount impersonieren und erfolgreich nutzen
 kubectl -n app get all --as system:serviceaccount:app:admin
+
+## ServiceAccount impersonieren bei fehlenden Rechten
 kubectl get all --as system:serviceaccount:app:admin

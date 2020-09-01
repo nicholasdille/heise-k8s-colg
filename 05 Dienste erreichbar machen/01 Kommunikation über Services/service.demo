@@ -1,13 +1,24 @@
 # Kommunikation über Services
 
-## kube-proxy im Modus iptables
+## Cluster ausrollen mit kube-proxy im Modus iptables
 kind create cluster --config kind-iptables.yaml
+
+## Anwendung mit Service ausrollen
 kubectl apply -f app.yaml
+
+## Regeln auf allen Knoten prüfen
 docker exec -it kind-control-plane iptables-save | grep KUBE-SERVICES | grep web
 docker exec -it kind-worker iptables-save | grep KUBE-SERVICES | grep web
 
-## kube-proxy im Module ipvs
+## Cluster löschen
+kind delete cluster
+
+## Cluster ausrollen mit kube-proxy im Module ipvs
 kind create cluster --config kind-ipvs.yaml
+
+## Anwendung mit Service ausrollen
 kubectl apply -f app.yaml
+
+## Regeln auf allen Knoten prüfen
 docker exec -it kind-control-plane ipvsadm -ln
 docker exec -it kind-worker ipvsadm -ln

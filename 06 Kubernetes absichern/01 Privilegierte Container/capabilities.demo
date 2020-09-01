@@ -1,13 +1,19 @@
 # Privilegierte Container
 
-## Vererbung von Capabilities
+## Capabilities eines normalen Containers anzeigen
 docker run -it --rm nicholasdille/tester bash -c 'getpcaps $$'
+
+## Capabilities eines Containers mit zusätzlicher Capability anzeigen
 docker run -it --rm --cap-add sys_admin nicholasdille/tester bash -c 'getpcaps $$'
+
+## Capabilities eines privilegierten Containers anzeigen
 docker run -it --rm --privileged nicholasdille/tester bash -c 'getpcaps $$'
 
-## Capabilities freiwillig abgeben
+## Capabilities im Container freiwillig abgeben
 docker run -it --rm --privileged nicholasdille/tester bash -c 'capsh --inh="" --drop="all" -- -c "getpcaps $$"'
 
-## Ausbruch auf den Host
+## Ausbruch auf den Host aus privilegiertem Container
 docker run -it --rm --privileged ubuntu bash
 nsenter -t 1 -m -u -n -i sh
+exit
+exit

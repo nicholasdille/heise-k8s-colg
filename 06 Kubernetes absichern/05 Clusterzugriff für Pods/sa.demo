@@ -13,3 +13,4 @@ TOKEN=$(cat /run/secrets/kubernetes.io/serviceaccount/token)
 curl https://kubernetes/api/v1/namespaces/default/pods/ \
     --cacert /run/secrets/kubernetes.io/serviceaccount/ca.crt \
     --header "Authorization: Bearer ${TOKEN}"
+exit

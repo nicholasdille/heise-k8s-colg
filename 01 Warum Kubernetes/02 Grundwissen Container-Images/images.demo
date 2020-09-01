@@ -6,6 +6,8 @@ docker pull alpine
 
 ## Images anschauen (Name und Tag)
 docker image ls
+
+## Image löschen
 docker image rm ubuntu
 
 ## Images bauen

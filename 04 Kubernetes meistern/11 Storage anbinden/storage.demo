@@ -1,13 +1,22 @@
 # Storage anbinden
 
+## PersistentVolume anschauen und ausrollen
 cat pv.yaml
 kubectl apply -f pv.yaml
+
+## PersistentVolumes auslesen
 kubectl get pv
 
+## PersistentVolumeClaim anschauen und ausrollen
 cat pvc.yaml
 kubectl apply -f pvc.yaml
+
+## PersistentVolumeClaims auslesen
 kubectl get pvc
 
+## Pod mit PVC anschauen und ausrollen
 cat pod.yaml
 kubectl apply -f pod.yaml
+
+## Ergebnis anschauen
 kubectl get pods

@@ -3,17 +3,27 @@
 ## Cluster erstellen
 kind create cluster --config kind.yaml
 
-## Sicherstellen des Benutzers
+## Benutzer des Container sicherstellen
 cat nginx.yaml
 kubectl apply -f nginx.yaml
+
+## Ergebnis anschauen
 kubectl get pods
+
+## Funktion prüfen
 kubectl exec -it nginx -- bash
 curl localhost
 curl localhost:8080
+exit
 
-## Erzwingen des Benutzers
+## Anderen Benutzer erzwingen
 cat user.yaml
 kubectl apply -f nginx.yaml
+
+## Ergebnis anschauen
 kubectl get pods
+
+## Benutzer prüfen
 kubectl exec -it user -- sh
 whoami
+exit

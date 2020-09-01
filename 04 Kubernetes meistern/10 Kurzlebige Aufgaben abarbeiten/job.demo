@@ -1,21 +1,41 @@
 # Kurzlebige Aufgaben abarbeiten
 
+## Job anschauen und ausrollen
 cat job.yaml
 kubectl apply -f job.yaml
+
+## Ergebnis anschauen (Job und Pod)
 kubectl get all
-kubectl get pod -l job-name=pi -o name | xargs kubectl
+
+## Ergebnis des Jobs anschauen
+kubectl get pod -l job-name=pi -o name | xargs kubectl logs
+
+## Job (und Pod) löschen
 kubectl delete job pi
 
+## Job mit Neustart anschauen und ausrollen
 cat restart.yaml
 kubectl apply -f restart.yaml
+
+## Ergebnis anschauen
 kubectl get all
+
+## Job (und Pods) löschen
 kubectl delete job restart
 
+## Parallele Jobs anschauen und ausrollen
 cat parallel.yaml
 kubectl apply -f parallel.yaml
+
+## Ergebnis anschauen
 kubectl get all
+
+## Job (und Pods) löschen
 kubectl delete job parallel
 
-kubectl apply -f cronjob.yaml
+## CronJob anschauen und anlegen
 cat cronjob.yaml
+kubectl apply -f cronjob.yaml
+
+## Ergebnis nach einer Minute beobachten
 kubectl get all

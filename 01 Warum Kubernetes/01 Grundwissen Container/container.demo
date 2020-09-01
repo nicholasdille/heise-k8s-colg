@@ -1,17 +1,27 @@
 # Vorwissen: Container
 
-## Interaktiver Container
+## Starten eines interaktiven Containers
 docker container run -it --name test ubuntu bash
+
+## Auslisten aller Container
 docker container ps -a
+
+## Löschen des eben gestarteten Containers
 docker container rm test
 
-## Hintergrundcontainer
+## Starten eines Hintergrundcontainers
 docker container run -d --name web nginx
+
+## Auslisten aller Container
 docker container ps -a
+
+## Container sind Kindprozesse von dockerd
 ps faux
 
-## Kontext eines Containers
+## Shell im Kontext eines Containers ausführen
 docker container exec -it web bash
+
+## Befehl im Kontext eines Containers ausführen
 docker container exec -it web curl localhost
 
 ## Logs eines Containers

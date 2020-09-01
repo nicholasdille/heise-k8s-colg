@@ -1,18 +1,19 @@
 # Container zur Initialisierung
 
-# InitContainer anschauen
+## InitContainer anschauen
 cat init.yaml
 
-# InitContainer ausrollen
+## InitContainer ausrollen
 kubectl apply -f pod.yaml
 kubectl apply -f service.yaml
 
-# Ergebnis anschauen
+## Ergebnis anschauen
 kubectl get all
 
-# Log des InitContainers anschauen
+## Log des InitContainers anschauen
 kubectl logs pod-with-init -c init
 
-# Ausgabe prüfen
+## Ausgabe prüfen
 kubectl run -it --image=cmd.cat/bash/curl -- bash
 curl -s pod-with-init
+exit

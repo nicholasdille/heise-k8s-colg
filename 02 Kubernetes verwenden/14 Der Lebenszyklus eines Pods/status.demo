@@ -1,13 +1,13 @@
 # Lebenszyklus
 
-# completed
+## Erfolgreicher Pod ohne Neustart
 kubectl apply -f completed.yaml
 
-# crashloopbackoff
+## Fehlgeschlagender Pods mit Neustart
 kubectl apply -f crashloopbackoff.yaml
 
-# failed
+## Fehlgeschlafender Pod ohne Neustart
 kubectl apply -f failed.yaml
 
-# imagepullbackoff
+## Fehlerhalftes Image
 kubectl apply -f imagepullbackoff.yaml

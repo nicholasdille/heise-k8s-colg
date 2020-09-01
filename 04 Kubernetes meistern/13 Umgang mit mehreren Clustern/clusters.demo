@@ -1,26 +1,31 @@
 # Mehrere Cluster
 
-## Vorbereitung
+## Zwei Cluster ausrollen
 kind create cluster --name cluster1
 kind create cluster --name cluster2
-kubectl config view --raw --output json | \
-    jq --raw-output '.clusters[] | select(.name | startswith("kind-")) | .cluster.server' | \
-    while read; do \
-        echo ${REPLY#https://}; \
-    done | \
-    xargs -n 1 -I{} ssh -fNL {}:{} docker-hcloud
 
-# Cluster anzeigen
+## Aktuellste Version von kubectx installieren
+curl --silent https://api.github.com/repos/ahmetb/kubectx/releases/latest | \
+    jq --raw-output '
+        .assets[]
+        | select(.name | startswith("kubectx"))
+        | select(.name | endswith("_linux_x86_64.tar.gz"))
+        | .browser_download_url
+        '| \
+    xargs curl --location --fail | \
+    tar -xz kubectx
+
+## Cluster anzeigen
 kind get clusters
 
-# Kontexte anzeigen
-kubectx
+## Kontexte anzeigen
+./kubectx
 
-# Knoten anzeigen
+## Knoten anzeigen
 kubectl get nodes
 
-# Kontext wechseln
-kubectx kind-cluster1
+## Kontext wechseln
+./kubectx kind-cluster1
 
-# Knoten anzeigen
+## Knoten anzeigen
 kubectl get nodes

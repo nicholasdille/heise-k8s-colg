@@ -1,14 +1,23 @@
 # Knoten mit Taints markieren
 
+## Cluste rausrollen
 kind create cluster --config kind.yaml
 
+## Knoten mit Taint versehen
 kubectl taint node kind-worker dille.io/reservedFor=web2:NoSchedule reservedFor=foo:NoExecute
+
+## Knoten mit Taints untersuchen
 kubectl describe node kind-worker
 
-cat deployment.yaml
+## "Normales" Deployment ausrollen
 kubectl apply -f deployment.yaml
+
+## Verteilung der Pods anschauen
 kubectl get pods -o wide
 
+## Deployment mit Toleration anschauen und ausrollen
 cat tolerations.yaml
 kubectl apply -f tolerations.yaml
+
+## Verteilung der Pods anschauen
 kubectl get pods -o wide

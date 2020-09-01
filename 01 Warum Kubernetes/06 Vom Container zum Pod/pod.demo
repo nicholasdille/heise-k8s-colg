@@ -12,8 +12,14 @@ docker run -d --name registry --network container:pod registry:2
 ## Pod nutzen
 docker run -it --network container:pod docker:stable
 
-## Dienste nutzen
+## Prozesse anderer Container im Pod sind nicht sichtbar
 ps faux
+
+## Nachinstallation einiger Tools
 apk add curl jq
+
+## Testen der Verbindung zur Registry
 curl localhost:5000/v2/
+
+## Testen der Verbindung zum Docker-Daemon
 curl localhost:2375/

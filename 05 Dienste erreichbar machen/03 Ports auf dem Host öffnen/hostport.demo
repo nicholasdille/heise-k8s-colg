@@ -1,10 +1,11 @@
 # Ports auf dem Host öffnen
 
-## Vorbereitungen
+## Cluster ausrollen
 kind create cluster --config kind.yaml
-ssh -fNL 127.0.0.1:8080:127.0.0.1:8080 docker-hcloud
 
-## App ausrollen und testen
+## Anwendung mit hostPort anschauen und ausrollen
 cat app.yaml
 kubectl apply -f app.yaml
+
+## Zugriff über hostPort testen
 curl localhost:8080

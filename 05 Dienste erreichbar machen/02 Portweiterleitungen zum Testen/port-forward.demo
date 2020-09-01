@@ -1,6 +1,13 @@
 # Portweiterleitungen zum Testen
 
+## Cluster ausrollen
 kind create cluster --config kind.yaml
+
+## Anwendung ausrollen
 kubectl apply -f app.yaml
+
+## Portweiterleitung einrichten
 kubectl port-forward service/web 8080:80
-# Check http://localhost:8080/
+
+## Portweiterleitung testen (auch im Browser)
+curl http://localhost:8080/

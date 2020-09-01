@@ -1,15 +1,31 @@
 # Affinität
 
+## Cluster ausrollen
 kind create cluster --config kind.yaml
 
+## Beispiel für Pod mit Knotenaffinität anschauen und ausrollen
 cat node_affinity.yaml
 kubectl apply -f node_affinity.yaml
+
+## Verteilung der Pods anschauen
 kubectl get pods -o wide
+
+## Ersten Worker für Pods sperren
 kubectl cordon kind-worker
+
+## Pods neu ausrollen
 kubectl delete -f node_affinity.yaml
 kubectl apply -f node_affinity.yaml
+
+## Verteilung der Pods anschauen
+kubectl get pods -o wide
+
+## Ersten Worker für Pods freigeben
 kubectl uncordon kind-worker
 
+## Beispiel für Pod-(Anti-)Affinität anschauen und ausrollen
 cat pod_affinity.yaml
 kubectl apply -f pod_affinity.yaml
+
+## Verteilung der Pods anschauen
 kubectl get pods -o wide

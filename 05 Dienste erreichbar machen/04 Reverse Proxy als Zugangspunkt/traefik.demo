@@ -1,15 +1,37 @@
 # Reverse Proxy als Zugangspunkt
 
-# create DNS record *.dille.io to 127.0.0.1
+## DNS-Eintrag einrichten für *.dille.io mit der IP-Adresse 127.0.0.1
+:
+
+## Cluster ausrollen
 kind create cluster --config kind.yaml
-sudo ssh -fNL 127.0.0.1:80:127.0.0.1:80 -i ~nicholas/id_rsa_hetzner docker.dille.io
 
-# check resources
+## Deployment von traefik anschauen
+cat traefik-deployment.yaml
+
+## Berechtigungen von traefik anschauen
+cat traefik-rbac.yaml
+
+## Service für traefik anschauen
+cat traefik-svc.yaml
+
+## Ingress für Dashboard von traefik anschauen
+cat traefik-dashboard.yaml
+
+## traefik ausrollen
 cat traefik-*.yaml | kubectl apply -f -
-# check http://traefik.dille.io/dashboard
 
-# check resources
+## Dashboard im Browser prüfen (unter http://traefik.dille.io/dashboard)
+:
+
+## Ingress für Anwendung anschauen
+cat app-ingress.yaml
+
+## Anwendung ausrollen
 cat app-*.yaml | kubectl apply -f -
-# check http://traefik.dille.io/dashboard
-# check http://web.dille.io
-# reload
+
+## Dashboard im Browser prüfen (unter http://traefik.dille.io/dashboard)
+:
+
+## Anwendung im Browser prüfen (unter http://web.dille.io)
+:

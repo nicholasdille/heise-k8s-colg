@@ -1,7 +1,7 @@
 # Images auf Sicherheitslücken prüfen
 
 ## Schnellstart
-docker run -it --rm --volume ${HOME}/.cache:/root/.cache aquasec/trivy image python:3.4-alpine
+docker run -it --rm image python:3.4-alpine
 
 ## CI: Herunterladen der Datenbank
 docker run -it --rm --volume ${HOME}/.cache:/root/.cache aquasec/trivy image --download-db-only

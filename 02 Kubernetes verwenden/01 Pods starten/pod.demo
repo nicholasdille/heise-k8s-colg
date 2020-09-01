@@ -1,40 +1,42 @@
 # Pods starten
 
-# Imperativ einen Pod starten
+## Imperativ einen Pod starten
 kubectl run -it --image=alpine --rm --command -- bash
 
-# Minimale Pod-Beschreibung in YAML
+## Minimale Pod-Beschreibung in YAML
 cat pod.yaml
 
-# Pod ausrollen
+## Pod ausrollen
 kubectl apply -f pod.yaml
 
-# Ergebnis anschauen
+## Ergebnis anschauen
 kubectl get pods
 
-# Pod verändern
+## Pod verändern
 yq write --inplace pod.yaml 'spec.containers(name==nginx).image' nginx:1.19
 
-# Änderung ausrollen
+## Änderung ausrollen
 kubectl apply -f pod.yaml
 
-# Ergebnis anschauen (Neustarts erhöhen sich)
+## Ergebnis anschauen (Neustarts erhöhen sich)
 kubectl get pods
 kubectl get pods -o yaml
 
-# Pod entfernen
+## Pod entfernen
 kubectl delete -f pod.yaml
 
-# Ergebnis anschauen (Pod verschwindet)
+## Ergebnis anschauen (Pod verschwindet)
 kubectl get pods
 
-# Pod-Beschreibung mit zwei Containern
+## Pod-Beschreibung mit zwei Containern
 cat containers.yaml
 
-# Pod mit zwei Containern ausrollen
+## Pod mit zwei Containern ausrollen
 kubectl apply -f containers.yaml
 
-# Ergebnis anschauen (CrashLoopBackoff)
+## Ergebnis anschauen (CrashLoopBackoff)
 kubectl get pods
+
+## Logs auslesen
 kubectl logs web -c nginx
 kubectl logs web -c apache

@@ -1,17 +1,17 @@
 # Pods auf allen Knoten starten
 
-# Cluster erstellen
+## Cluster erstellen
 kind create cluster --config kind.yaml
 
-# DaemonSet anschauen und ausrollen
+## DaemonSet anschauen und ausrollen
 cat daemonset.yaml
 kubectl apply -f daemonset.yaml
 
-# Ergebnis anschauen
+## Ergebnis anschauen
 kubectl get all
 
-# Pod pro Knoten prüfen
+## Pod pro Knoten prüfen
 kubectl get pods -o wide
 
-# Pod neu erstellen lassen
+## Pod neu erstellen lassen
 kubectl get pods -o name | head -n 1 | xargs kubectl delete

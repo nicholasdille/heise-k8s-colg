@@ -1,35 +1,37 @@
 # Lifecycle Management
 
-# Deployment-Beschreibung anschauen
+## Deployment-Beschreibung anschauen
 cat deployment.yaml
 
-# Deployment ausrollen
+## Deployment ausrollen
 kubectl apply -f deployment.yaml
 
-# Service
+## Service
 cat service.yaml
 kubectl apply -f service.yaml
 
-# Ergebnis anschauen
-# - Felder im Deployment erklären
-# - Zugehöriges ReplicaSet erklären
-# - Zugehörige Pods anschauen
+## Ergebnis anschauen
+## - Felder im Deployment erklären
+## - Zugehöriges ReplicaSet erklären
+## - Zugehörige Pods anschauen
 kubectl get all
 
-# Test
+## Verbindung zu Pods prüfen
 kubectl run -it --image=cmd.cat/bash/curl --rm --command -- bash
 watch curl -s web
+exit
 
-# Update
+## Aktualisieren der Pods mithilfe des Deployments
 yq write --inplace deployment.yaml 'spec.template.spec.containers(name==nginx).image' nicholasdille/nginx-hello:1.18
 kubectl apply -f deployment.yaml
 
-# Test
+## Verbindung zu Pods prüfen
 kubectl run -it --image=cmd.cat/bash/curl --rm --command -- bash
 watch curl -s web
+exit
 
-# Update history
+## Anzeigen der Update-Historie
 kubectl rollout history deployment web
 
-# Rollback
+## Rollback zum letzten Stand des Deployments
 kubectl rollout undo deployment web

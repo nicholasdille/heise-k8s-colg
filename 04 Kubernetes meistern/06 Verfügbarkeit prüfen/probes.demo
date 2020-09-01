@@ -1,11 +1,23 @@
 # Probes
 
+## Cluster erstellen
 kind create cluster
 
+## Exec-Probe anschauen und ausrollen
 cat exec.yaml
 kubectl apply -f exec.yaml
+
+## Neustart des Pods nach ca. 10 Sekunden beobachten
 kubectl get pods
 
-# tcp
-# http
-# mysql
+## Offene Ports mit der TCP-Probe prüfen
+cat tcp.yaml
+kubectl apply -f tcp.yaml
+
+## Webserver mit HTTP-Probe prüfen
+cat http.yaml
+kubectl apply -f http.yaml
+
+## Probes für MySQL ausprobieren
+cat mysql.yaml
+kubectl apply -f mysql.yaml

@@ -1,10 +1,18 @@
 # Knoten bevorzugen
 
+## Cluster erstellen
 kind create cluster --name nodeselector --config kind.yaml
+
+## Deployment mit Knotenauswahl anschauen und ausrollen
 cat nodeselector.yaml
 kubectl apply -f nodeselector.yaml
+
+## Verteilung der Pods anschauen
 kubectl get pods -o wide
 
+## Deployment aktualisieren und ausrollen
 yq write -i nodeselector.yaml 'spec.template.spec.nodeSelector."dille.io/even"' maybe
 kubectl apply -f nodeselector.yaml
+
+## Verteilung der Pods anschauen
 kubectl get pods -o wide

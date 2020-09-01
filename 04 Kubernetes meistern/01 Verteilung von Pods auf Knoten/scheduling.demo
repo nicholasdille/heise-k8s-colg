@@ -1,11 +1,10 @@
 # Verteilung von Pods auf Knoten
 
-# Erstellen eines Clusters mit vier Worker-Knoten
+## Erstellen eines Clusters mit vier Worker-Knoten
 kind create cluster --name scheduling --config kind.yaml
 
-# Viele Pods ausrollen
-cat scheduling.yaml
+## Zehn Pods ausrollen
 kubectl apply -f scheduling.yaml
 
-# Verteilung der Pods anschauen
+## Verteilung der Pods auf Knoten anschauen
 kubectl get pods -o wide

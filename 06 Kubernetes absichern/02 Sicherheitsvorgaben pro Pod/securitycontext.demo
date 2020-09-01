@@ -3,13 +3,17 @@
 ## Cluster erstellen
 kind create cluster --config kind.yaml
 
-## Privilegierten Pod erlaufen
+## Privilegierten Pod erlauben
 cat dind.yaml
 kubectl apply -f dind.yaml
+
+## Ergebnis anschauen
 kubectl get pods
 kubectl logs pods
 
 ## Anpassung der Systemzeit erlauben
 cat ntpd.yaml
 kubectl apply -f ntpd.yaml
+
+## Ergebnis anschauen
 kubectl get pods

@@ -1,5 +1,7 @@
 # Leichtgewichtige Cluster
 
+## Cluster mit k3d erstellen
 k3d cluster create --agents 2
 
+## Knoten des Clusters auslesen
 kubectl get nodes
