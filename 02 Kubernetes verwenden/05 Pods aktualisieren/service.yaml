@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: web
 spec:
-  # Passender Selektor für ReplicaSet
+  # Passender Selektor
   selector:
     app: web
   ports:

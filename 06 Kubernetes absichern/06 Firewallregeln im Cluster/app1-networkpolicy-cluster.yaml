@@ -16,9 +16,4 @@ spec:
           app: app2
   egress:
   - to:
-    - namespaceSelector:
-        matchLabels:
-          app: app2
-    ports:
-    - protocol: TCP
-      port: 80
+    - namespaceSelector: {}

@@ -3,6 +3,13 @@
 ## Cluster erstellen
 kind create cluster --config kind.yaml
 
+## Benutzer des Container ermitteln
+docker run -d --name nginx nginxinc/nginx-unprivileged
+docker exec -it nginx bash
+id -u
+id -g
+exit
+
 ## Benutzer des Container sicherstellen
 cat nginx.yaml
 kubectl apply -f nginx.yaml
@@ -12,6 +19,8 @@ kubectl get pods
 
 ## Funktion prüfen
 kubectl exec -it nginx -- bash
+id -u
+id -g
 curl localhost
 curl localhost:8080
 exit

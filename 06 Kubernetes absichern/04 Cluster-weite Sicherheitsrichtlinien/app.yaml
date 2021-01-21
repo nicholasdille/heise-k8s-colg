@@ -15,10 +15,10 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nicholasdille/nginx-hello
+        image: nginxinc/nginx-unprivileged
         ports:
         - name: web
-          containerPort: 80
+          containerPort: 8080
 ---
 apiVersion: v1
 kind: Service

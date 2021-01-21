@@ -37,5 +37,5 @@ kubectl apply -f service.yml
 
 ## Prüfen der Antwort über den Service
 kubectl run -it --image=cmd.cat/bash/curl --rm --command -- bash
-watch "curl -s web | grep name"
+watch curl -s web
 exit

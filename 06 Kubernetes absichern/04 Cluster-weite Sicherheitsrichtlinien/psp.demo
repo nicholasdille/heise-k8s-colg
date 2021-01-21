@@ -9,10 +9,10 @@ sed -i -E 's/^(\s+- --enable-admission-plugins=.+)$/\1,PodSecurityPolicy/' kube-
 docker cp kube-apiserver.yaml kind-control-plane:/etc/kubernetes/manifests/
 
 ## Regeln für kube-system ausrollen
-kubectl apply -f privileged-psp-with-rbac.yaml
+kubectl apply -f privileged-psp.yaml
 
 ## Default-Regeln ausrollen
-kubectl apply -f default-psp-with-rbac.yaml
+kubectl apply -f default-psp.yaml
 
 ## Anwendung ausrollen
 kubectl apply -f app.yaml
