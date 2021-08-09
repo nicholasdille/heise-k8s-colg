@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nicholasdille/nginx-hello
+        image: nicholasdille/nginx-hello:1.18
