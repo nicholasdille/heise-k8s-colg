@@ -33,7 +33,7 @@ kubectl get all
 cat service.yaml
 
 ## Einen Service ausrollen
-kubectl apply -f service.yml
+kubectl apply -f service.yaml
 
 ## Prüfen der Antwort über den Service
 kubectl run -it --image=cmd.cat/bash/curl --rm --command -- bash
