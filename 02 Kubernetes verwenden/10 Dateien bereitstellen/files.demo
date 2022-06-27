@@ -4,7 +4,7 @@
 cat configmap.yaml
 
 ## Beispiel ausrollen
-kubectl apply -f configmap.yaml
+kubectl apply -f configmap.yaml -f configmap-pod.yaml -f configmap-service.yaml
 
 ## Ergebnis anschauen
 kubectl get pods
