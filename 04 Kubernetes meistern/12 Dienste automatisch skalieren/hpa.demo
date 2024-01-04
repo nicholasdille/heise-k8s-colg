@@ -4,7 +4,7 @@
 kind create cluster --config kind.yaml
 
 ## Metrics-Server ausrollen
-curl -sLf https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml | kubectl apply -f -
+curl -sLf https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.4/components.yaml | kubectl apply -f -
 
 ## Metrics-Server patchen
 kubectl --namespace=kube-system patch deployment metrics-server --type strategic --patch "$(cat metrics-server-patch.yaml)"
