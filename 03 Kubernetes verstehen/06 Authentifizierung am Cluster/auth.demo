@@ -7,7 +7,7 @@ kind create cluster --config kind.yaml
 curl --silent https://api.github.com/repos/mike-engel/jwt-cli/releases/latest | \
     jq --raw-output '.assets[] | select(.name | endswith("-linux.tar.gz")) | .browser_download_url' | \
     xargs curl --location --fail | \
-    tar -xz --strip-components=2
+    tar -xz
 
 ## ServiceAccount erstellen
 kubectl create sa test
